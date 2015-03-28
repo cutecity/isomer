@@ -136,7 +136,7 @@ Isomer.prototype.sortPaths = function () {
   this.scene.length = 0;
 
  // topological sort
-  
+
   var drawBefore = [];
   for (var i = 0 ; i < pathList.length ; i++){
     drawBefore[i] = [];
@@ -173,7 +173,7 @@ Isomer.prototype.sortPaths = function () {
       }
     }
   }
-  //purge 
+  //purge
   //could be done more in a smarter order, that's why drawn is an element of pathList[] and not a separate array
   for (var i = 0 ; i < pathList.length ; i++){
     if(pathList[i].drawn == 0){
@@ -222,16 +222,16 @@ Isomer.prototype._hasIntersection = function(pointsA, pointsB) {
     BmaxX = Math.max(BmaxX, pointsB[i].x);
     BmaxY = Math.max(BmaxY, pointsB[i].y);
   }
-  
-  if(((AminX <= BminX && BminX <= AmaxX) || (BminX <= AminX && AminX <= BmaxX)) && 
+
+  if(((AminX <= BminX && BminX <= AmaxX) || (BminX <= AminX && AminX <= BmaxX)) &&
      ((AminY <= BminY && BminY <= AmaxY) || (BminY <= AminY && AminY <= BmaxY))) {
     // now let's be more specific
     var polyA = pointsA.slice();
     var polyB = pointsB.slice();
     polyA.push(pointsA[0]);
     polyB.push(pointsB[0]);
-  
-    // see if edges cross, or one contained in the other	
+
+    // see if edges cross, or one contained in the other
     var deltaAX = [];
     var deltaAY = [];
     var deltaBX = [];
@@ -249,20 +249,20 @@ Isomer.prototype._hasIntersection = function(pointsA, pointsB) {
       deltaBY[i] = polyB[i+1].y - polyB[i].y;
       rB[i] = deltaBX[i] * polyB[i].y - deltaBY[i] * polyB[i].x;
     }
-  
+
     for(i = 0 ; i <= polyA.length - 2 ; i++){
       for(j = 0 ; j <= polyB.length - 2 ; j++){
         if(deltaAX[i] * deltaBY[j] != deltaAY[i] * deltaBX[j]){
           //case when vectors are colinear, or one polygon included in the other, is covered after
           //two segments cross each other if and only if the points of the first are on each side of the line defined by the second and vice-versa
-          if((deltaAY[i] * polyB[j].x - deltaAX[i] * polyB[j].y + rA[i]) * (deltaAY[i] * polyB[j+1].x - deltaAX[i] * polyB[j+1].y + rA[i]) < -0.000000001 &&  
+          if((deltaAY[i] * polyB[j].x - deltaAX[i] * polyB[j].y + rA[i]) * (deltaAY[i] * polyB[j+1].x - deltaAX[i] * polyB[j+1].y + rA[i]) < -0.000000001 &&
              (deltaBY[j] * polyA[i].x - deltaBX[j] * polyA[i].y + rB[j]) * (deltaBY[j] * polyA[i+1].x - deltaBX[j] * polyA[i+1].y + rB[j]) < -0.000000001){
             return true;
           }
         }
       }
     }
-  
+
     for(i = 0 ; i <= polyA.length - 2 ; i++){
       if(isPointInPoly(polyB, {x:polyA[i].x, y:polyA[i].y})){
         return true;
@@ -273,7 +273,7 @@ Isomer.prototype._hasIntersection = function(pointsA, pointsB) {
         return true;
       }
     }
-  
+
     return false;
   } else {
     return false;

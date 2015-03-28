@@ -95,16 +95,16 @@ Path.prototype.closerThan = function(pathA, observer) {
   var result = pathA._countCloserThan(this, observer) - this._countCloserThan(pathA, observer);
   return result;
 }
-  
+
 Path.prototype._countCloserThan = function(pathA, observer) {
   var Vector = Isomer.Vector;
   var i = 0;
-	
+
   // the plane containing pathA is defined by the three points A, B, C
   var AB = Vector.fromTwoPoints(pathA.points[0], pathA.points[1]);
   var AC = Vector.fromTwoPoints(pathA.points[0], pathA.points[2]);
   var n = Vector.crossProduct(AB, AC);
-   
+
   var OA = Vector.fromTwoPoints(Point.ORIGIN, pathA.points[0]);
   var OU = Vector.fromTwoPoints(Point.ORIGIN, observer); //U = user = observer
 
@@ -128,10 +128,10 @@ Path.prototype._countCloserThan = function(pathA, observer) {
   if(result == 0){
     return 0;
   } else {
-    return ((result + result0) / this.points.length); 
+    return ((result + result0) / this.points.length);
   }
 };
-  
+
 
 
 
